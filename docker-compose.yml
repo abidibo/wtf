@@ -1,0 +1,13 @@
+version: '3'
+services:
+    server:
+        image: wtf_server
+        build: ./server
+        command: npm start
+        restart: unless-stopped
+        ports:
+            - 3000:3000
+        environment: 
+            PORT: 3000
+        volumes:
+            - ./server/src:/app/src/
