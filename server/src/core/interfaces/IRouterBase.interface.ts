@@ -1,5 +1,5 @@
 interface IRouterBase {
-    initRoutes(): any
+  initRoutes(): any;
 }
 
-export default IRouterBase
+export default IRouterBase;

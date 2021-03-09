@@ -1,4 +1,4 @@
-import {Request, Response, NextFunction} from 'express'
+import { Request, Response, NextFunction } from "express";
 
 /**
  * Logger Middleware
@@ -9,7 +9,11 @@ import {Request, Response, NextFunction} from 'express'
  * @TODO implement a file logger middleware
  * https://github.com/log4js-node/log4js-node
  */
-export const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
-  console.log(`${new Date().toUTCString()} [${req.method}] ${req.originalUrl}`)
-  next()
-}
+export const loggerMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log(`${new Date().toUTCString()} [${req.method}] ${req.originalUrl}`);
+  next();
+};
