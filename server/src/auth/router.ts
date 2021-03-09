@@ -1,4 +1,4 @@
-import * as express from "express";
+import express, { Router } from "express";
 import IRouterBase from "../core/interfaces/IRouterBase.interface";
 import { list, detail } from "./views";
 
@@ -8,14 +8,14 @@ import { list, detail } from "./views";
  * Defines auth app available routes and links them to view functions
  */
 class AuthRouter implements IRouterBase {
-  public path = "/user";
-  public router = express.Router();
+  public path: string = "/user";
+  public router: Router = express.Router();
 
   constructor() {
     this.initRoutes();
   }
 
-  public initRoutes() {
+  public initRoutes(): void {
     this.router.get(this.path, list);
     this.router.get(`${this.path}/:id`, detail);
   }

@@ -8,7 +8,7 @@ import { Request, Response } from "express";
  *
  * const myView = res404IfUndefined('Not found')((req, res) => { return undefined; })
  */
-export const res404IfUndefined = (message: String): Function => (
+export const res404IfUndefined = (message: string): Function => (
   view: Function
 ): Function => (req: Request, res: Response): void => {
   const data = view(req, res);

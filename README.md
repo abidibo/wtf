@@ -34,4 +34,18 @@ The server runs on `localhost:8000`, with live reload support.
 | `npm test:watch` | Runs tests in watch mode |
 | `npm test:coverage` | Runs tests and produces a coverage report |
 
+## Client
 
+The client application is a React + Redux app with styled components and Tailwind
+
+### Getting started
+
+#### Local machine
+
+``` bash
+$ cd client
+$ npm install
+$ npm start
+```
+
+The application runs on `localhost:9000`

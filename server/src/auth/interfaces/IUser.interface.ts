@@ -1,8 +1,8 @@
 export interface IUser {
-  id: Number;
-  first_name: String;
-  email: String;
-  gender: String;
-  country: String;
-  job_title: String;
+  id: number;
+  first_name: string;
+  email: string;
+  gender: string;
+  country: string;
+  job_title: string;
 }
