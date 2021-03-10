@@ -7,8 +7,7 @@ const webpackConfig = merge<Configuration>(common(), {
   devtool: "inline-source-map",
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "assets"),
-    publicPath: "/",
+    contentBase: path.join(__dirname, "dist"),
     compress: true,
     port: 9000,
   },

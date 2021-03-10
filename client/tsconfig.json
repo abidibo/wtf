@@ -16,5 +16,6 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "downlevelIteration": true
-  }
+  },
+	"include": ["src", "index.d.ts"]
 }

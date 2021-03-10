@@ -36,7 +36,7 @@ The server runs on `localhost:8000`, with live reload support.
 
 ## Client
 
-The client application is a React + Redux app with styled components and Tailwind
+The client application is a React + Redux app with styled components.
 
 ### Getting started
 

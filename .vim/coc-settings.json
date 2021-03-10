@@ -1,22 +1,7 @@
 {
-    "coc.preferences.jumpCommand": "vsplit",
-    "diagnostic.checkCurrentLine": true,
-    "python.formatting.provider": "black",
-    "python.linting.enabled": false,
-    "diagnostic.showUnused": false,
-    "translator.toLang": "en",
-    "translator.engines": ["google"],
-    "css.validate": false,
-    "less.validate": false,
-    "scss.validate": false,
-    "wxss.validate": false,
-    "stylelintplus.autoFixOnFormat": true,
-    "eslint.format.enable": true,
-    "typescript.format.enabled": true,
-    "prettier.eslintIntegration": false,
-    "emmet.includeLanguages": {
-	"vue-html": "html",
-        "htmldjango": "html",
-        "javascript": "javascriptreact"
-    }
+  "prettier.eslintIntegration": false,
+  "prettier.semi": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
 }

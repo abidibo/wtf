@@ -1,7 +1,8 @@
-import path from "path";
-import { Configuration } from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import path from "path"
+import { Configuration } from "webpack"
+import HtmlWebpackPlugin from "html-webpack-plugin"
+import { CleanWebpackPlugin } from "clean-webpack-plugin"
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin"
 
 const webpackConfig = (): Configuration => ({
   entry: "./src/index.tsx",
@@ -10,10 +11,9 @@ const webpackConfig = (): Configuration => ({
   },
   output: {
     path: path.join(__dirname, "/dist"),
-    filename: "bundle.[hash].js",
+    filename: "bundle.[fullhash].js",
     publicPath: "",
   },
-  mode: "development",
   module: {
     rules: [
       {
@@ -21,12 +21,12 @@ const webpackConfig = (): Configuration => ({
         use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|webp)$/,
         use: [
           {
-            loader: "file-loader",
+            loader: "url-loader",
             options: {
-              name: "[path][name].[ext]",
+              limit: 102400, // in bytes
             },
           },
         ],
@@ -44,6 +44,7 @@ const webpackConfig = (): Configuration => ({
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: "./public/index.html" }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
-});
-export default webpackConfig;
+})
+export default webpackConfig
