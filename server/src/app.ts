@@ -1,32 +1,36 @@
-import express, { Application } from "express";
+import express, { Application } from "express"
+import cors from "cors"
+var app = express()
 
 /**
  * Main Application
  */
 class App {
-  public app: Application;
-  public port: number;
+  public app: Application
+  public port: number
 
   /**
    * App constructor
    */
   constructor(appInit: { port: number; middleWares: any; apps: any }) {
-    this.app = express();
-    this.port = appInit.port;
+    this.app = express()
+    // @TODO set CORS allowed hosts
+    this.app.use(cors())
+    this.port = appInit.port
 
-    this.middlewares(appInit.middleWares);
-    this.routes(appInit.apps);
+    this.middlewares(appInit.middleWares)
+    this.routes(appInit.apps)
   }
 
   /**
    * Attaches every defined middleware to express
    */
   private middlewares(middleWares: {
-    forEach: (arg0: (middleWare: any) => void) => void;
+    forEach: (arg0: (middleWare: any) => void) => void
   }) {
     middleWares.forEach((middleWare) => {
-      this.app.use(middleWare);
-    });
+      this.app.use(middleWare)
+    })
   }
 
   /**
@@ -34,8 +38,8 @@ class App {
    */
   private routes(apps: { forEach: (arg0: (app: any) => void) => void }) {
     apps.forEach((app) => {
-      this.app.use("/", app.router);
-    });
+      this.app.use("/", app.router)
+    })
   }
 
   /**
@@ -43,9 +47,9 @@ class App {
    */
   public listen() {
     this.app.listen(this.port, () => {
-      console.log(`App listening on the http://localhost:${this.port}`);
-    });
+      console.log(`App listening on the http://localhost:${this.port}`)
+    })
   }
 }
 
-export default App;
+export default App
