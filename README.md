@@ -49,3 +49,7 @@ $ npm start
 ```
 
 The application runs on `localhost:9000`
+
+## TODO
+
+- Compose docker compose configuration files
