@@ -78,7 +78,7 @@ const UserDetailView: React.FC<UserDetailProps> = (props) => {
         <Typography paragraph><strong>Job Title</strong>: {user.job_title}</Typography>
       </BaseLayout>
     ),
-    !isFetching || !user
+    isFetching || !user
   )
 }
 
