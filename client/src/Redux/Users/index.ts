@@ -52,7 +52,7 @@ export const fetchUsersEpic = (action$: ActionsObservable<Action>) => action$.pi
       map((response: any) => success(response)),
       catchError((err) => {
         // @TODO show a toast
-        alert(err.message)
+        alert(`Cannot fetch users: ${err.message}`)
         return of(failure(`Cannot fetch users: ${err.message}`))
       })
     )

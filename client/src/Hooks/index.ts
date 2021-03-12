@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import React from 'react'
 
 type PaginationHook = [
   number, (arg0: number) => void, any[]
 ]
 
 export const usePagination = (items: any[], listPerPage: number, initPage: number = 0) : PaginationHook => {
-  const [page, setPage] = useState(initPage)
+  const [page, setPage] = React.useState(initPage)
   let paginatedItems = [...items]
 
   const start = (page) * listPerPage
@@ -21,7 +21,7 @@ type SortingHook = [
 ]
 
 export const useSorting = (items: object[], initSortField: string, initSortDir: "desc" | "asc") : SortingHook => {
-  const [sort, setSort] = useState({
+  const [sort, setSort] = React.useState({
     field: initSortField,
     direction: initSortDir
   })
@@ -46,7 +46,7 @@ type FullTextSearchHook = [
 ]
 
 export const useFullTextSearch = (items: object[], fields: string[], initSearch: string) : FullTextSearchHook => {
-  const [search, setSearch] = useState(initSearch)
+  const [search, setSearch] = React.useState(initSearch)
   let filteredItems = items
   const re = new RegExp(search, 'i')
   filteredItems = [...items].filter(item => {
