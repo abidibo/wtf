@@ -7,9 +7,15 @@ const webpackConfig = merge<Configuration>(common(), {
   devtool: "inline-source-map",
   mode: "development",
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "public"),
+    publicPath: '/',
     compress: true,
+    serveIndex: false,
     port: 9000,
+    // allow refreshing subpath page without 404
+    historyApiFallback: {
+      index: '/'
+    }
   },
 });
 

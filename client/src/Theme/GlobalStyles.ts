@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
     flex: 1;
     flex-direction: column;
   }
+
+  a {
+    cursor: pointer;
+  }
 `
 
 export default GlobalStyle

@@ -3,6 +3,6 @@
  * that can be used directly to push new paths, i.e.:
  * history.push('/login')
  */
-import * as history from 'history'
-const createHistory = history.createBrowserHistory
-export default createHistory()
+import { createBrowserHistory, History } from 'history'
+const history: History = createBrowserHistory()
+export default history

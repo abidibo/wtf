@@ -10,6 +10,19 @@ const theme: Theme = createMuiTheme({
       main: Colors.secondary,
     },
   },
+  overrides: {
+    MuiTypography: {
+      h1: {
+        marginBottom: "1.5rem",
+        fontSize: "2.4rem",
+      },
+    },
+    MuiBreadcrumbs: {
+      ol: {
+        marginBottom: "1.5rem",
+      },
+    }
+  }
 })
 
 export default theme

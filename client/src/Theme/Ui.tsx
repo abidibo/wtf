@@ -6,7 +6,7 @@ export const Colors = {
   secondary: "#b3c100",
   lightGray: "#f7f7f7",
   mediumGray: "#c0c0c0",
-  white80: 'rgba(255, 255, 255, .8)',
+  white80: "rgba(255, 255, 255, .8)",
 }
 
 // flex stuff
@@ -15,9 +15,19 @@ export const FlexRow = styled.div`
   flex-direction: row;
 `
 
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 export const FlexRowJBetweenACenter = styled(FlexRow)`
   align-items: center;
   justify-content: space-between;
+`
+
+export const FlexColumnJCenterACenter = styled(FlexColumn)`
+  align-items: center;
+  justify-content: center;
 `
 
 // misc

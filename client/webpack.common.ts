@@ -12,7 +12,7 @@ const webpackConfig = (): Configuration => ({
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "bundle.[fullhash].js",
-    publicPath: "",
+    publicPath: "/",
   },
   module: {
     rules: [

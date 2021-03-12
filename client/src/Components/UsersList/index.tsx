@@ -1,25 +1,27 @@
-import React, { useCallback } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { selectUsers } from "../../Redux/Users"
-import { selectIsFetching } from "../../Redux/Utils"
-import { usePagination, useSorting, useFullTextSearch } from "../../Hooks"
-import { IUser } from "../../Redux/Users/Interfaces"
-import { Dimmer } from "../../Theme/Ui"
-import CircularProgress from "@material-ui/core/CircularProgress"
-import TextField from '@material-ui/core/TextField'
+import Link from "@material-ui/core/Link"
+import Paper from "@material-ui/core/Paper"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import TableCell from "@material-ui/core/TableCell"
-import TableSortLabel from "@material-ui/core/TableSortLabel"
 import TableContainer from "@material-ui/core/TableContainer"
-import TableHead from "@material-ui/core/TableHead"
-import TableRow from "@material-ui/core/TableRow"
 import TableFooter from "@material-ui/core/TableFooter"
+import TableHead from "@material-ui/core/TableHead"
 import TablePagination from "@material-ui/core/TablePagination"
-import Paper from "@material-ui/core/Paper"
-import { Colors } from "../../Theme/Ui"
+import TableRow from "@material-ui/core/TableRow"
+import TableSortLabel from "@material-ui/core/TableSortLabel"
+import TextField from "@material-ui/core/TextField"
+import Typography from "@material-ui/core/Typography"
+import React, {useCallback} from "react"
+import {useDispatch, useSelector} from "react-redux"
 import styled from "styled-components"
-import { request } from "../../Redux/Users"
+import config from "../../Config"
+import {withLoader} from "../../Decorators"
+import history from "../../history"
+import {useFullTextSearch, usePagination, useSorting} from "../../Hooks"
+import {request, selectUsers} from "../../Redux/Users"
+import {IUser} from "../../Redux/Users/Interfaces"
+import {selectIsFetching} from "../../Redux/Utils"
+import {Colors} from "../../Theme/Ui"
 
 const TableHeadCell = styled(TableCell)`
   background-color: ${Colors.lightGray};
@@ -47,8 +49,8 @@ const UsersList: React.FC = () => {
   // full text
   const [search, setSearch, textFilteredItems] = useFullTextSearch(
     users.slice(),
-    ['first_name', ],
-    '',
+    ["first_name"],
+    ""
   )
   const handleSearch = ({ target }) => {
     setPage(0)
@@ -56,8 +58,17 @@ const UsersList: React.FC = () => {
   }
 
   // sorting
-  const [sort, setSort, sortedItems] = useSorting(textFilteredItems, "id", "asc")
-  const handleSort = (field: string) => (): void => setSort({ field, direction: sort.field === field && sort.direction === 'asc' ? 'desc' : 'asc' })
+  const [sort, setSort, sortedItems] = useSorting(
+    textFilteredItems,
+    "id",
+    "asc"
+  )
+  const handleSort = (field: string) => (): void =>
+    setSort({
+      field,
+      direction:
+        sort.field === field && sort.direction === "asc" ? "desc" : "asc",
+    })
 
   // pagination
   const [rowsPerPage, setRowsPerPage] = React.useState(5)
@@ -82,71 +93,83 @@ const UsersList: React.FC = () => {
     dispatch(request())
   }, [])
 
-  if (isFetching) {
-    return (
-      <Dimmer>
-        <CircularProgress color="secondary" />
-      </Dimmer>
-    )
-  }
+  const content = (
+    <TableContainer component={Paper}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            {headers.map((headCell) => (
+              <TableHeadCell
+                key={headCell.field}
+                sortDirection={
+                  sort.field === headCell.field ? sort.direction : false
+                }
+              >
+                <TableSortLabel
+                  active={sort.field === headCell.field}
+                  direction={
+                    sort.field === headCell.field ? sort.direction : "asc"
+                  }
+                  onClick={handleSort(headCell.field)}
+                >
+                  {headCell.label}
+                </TableSortLabel>
+              </TableHeadCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {items.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell component="th" scope="row">
+                {user.id}
+              </TableCell>
+              <TableCell>
+                <Link
+                  onClick={() =>
+                    history.push(
+                      config.paths.userDetail.replace(":id", user.id)
+                    )
+                  }
+                >
+                  {user.first_name}
+                </Link>
+              </TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.gender}</TableCell>
+              <TableCell>{user.country}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              count={users.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          </TableRow>
+        </TableFooter>
+      </Table>
+    </TableContainer>
+  )
 
   return (
     <section>
-      <h1>Users</h1>
+      <Typography variant="h1">
+        Users
+      </Typography>
       <Toolbar>
-        <TextField label='Search by first name' value={search} onChange={handleSearch} />
+        <TextField
+          label="Search by first name"
+          value={search}
+          onChange={handleSearch}
+        />
       </Toolbar>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {headers.map((headCell) => (
-                <TableHeadCell
-                  key={headCell.field}
-                  sortDirection={
-                    sort.field === headCell.field ? sort.direction : false
-                  }
-                >
-                  <TableSortLabel
-                    active={sort.field === headCell.field}
-                    direction={
-                      sort.field === headCell.field ? sort.direction : "asc"
-                    }
-                    onClick={handleSort(headCell.field)}
-                  >
-                    {headCell.label}
-                  </TableSortLabel>
-                </TableHeadCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {items.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell component="th" scope="row">
-                  {user.id}
-                </TableCell>
-                <TableCell>{user.first_name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.gender}</TableCell>
-                <TableCell>{user.country}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                count={users.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-              />
-            </TableRow>
-          </TableFooter>
-        </Table>
-      </TableContainer>
+      {withLoader(content, isFetching)}
     </section>
   )
 }
