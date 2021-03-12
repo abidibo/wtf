@@ -11,7 +11,7 @@ You can run the entire project in docker containers:
 ``` bash
 $ git clone https://github.com/abidibo/wtf.git
 $ cd wtf
-$ ./run
+$ ./run.sh
 ```
 
 Visit http://localhost:9000

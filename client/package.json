@@ -68,7 +68,9 @@
     "webpack-merge": "^5.7.3"
   },
   "jest": {
-    "collectCoverageFrom": ["./src/**/*.{ts,tsx}"],
+    "collectCoverageFrom": [
+      "./src/**/*.{ts,tsx}"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ],
