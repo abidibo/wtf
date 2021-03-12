@@ -11,7 +11,7 @@ const webpackConfig = merge<Configuration>(common(), {
     publicPath: '/',
     compress: true,
     serveIndex: false,
-    port: 9000,
+    port: 9000, // @TODO put inside an env var
     // allow refreshing subpath page without 404
     historyApiFallback: {
       index: '/'

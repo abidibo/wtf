@@ -1,3 +1,4 @@
+# @TODO create a common composer and extend it
 version: '3'
 services:
     server:
@@ -11,3 +12,17 @@ services:
             PORT: 3000
         volumes:
             - ./server/src:/app/src/
+
+    client:
+        image: wtf_client
+        build: ./client
+        command: npm test
+        restart: unless-stopped
+        ports:
+            - 9000:9000
+        environment: 
+            PORT: 9000
+        volumes:
+            - ./client/src:/app/src/
+        depends_on:
+            - server
