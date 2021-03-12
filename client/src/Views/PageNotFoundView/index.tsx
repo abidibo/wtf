@@ -1,7 +1,7 @@
 import React from "react"
 import BaseLayout from "../../Layout/BaseLayout"
 import Image404 from '../../Assets/Images/404.gif'
-import { FlexColumnJCenterACenter } from '../../Theme/Ui'
+import { FlexColumnJCenterACenter, ImageResponsive } from '../../Theme/Ui'
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
 import history from "../../history"
@@ -13,7 +13,7 @@ const DashboardView: React.FC = () => (
       <Typography variant="h1">
         Page Not Found
       </Typography>
-      <img src={Image404} alt="404" />
+      <ImageResponsive src={Image404} alt="404" />
       <div style={{ marginTop: '2rem' }}>
         <Button
           color="secondary"

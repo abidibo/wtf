@@ -9,6 +9,11 @@ export const Colors = {
   white80: "rgba(255, 255, 255, .8)",
 }
 
+// mix
+export const ImageResponsive = styled.img`
+  max-width: 100%;
+`
+
 // flex stuff
 export const FlexRow = styled.div`
   display: flex;
